@@ -1,16 +1,10 @@
 import { Router } from "express";
-import { showLoginForm, addUser } from "../controllers/userController.js";
+import { addUser } from "../controllers/userController.js";
 import { passport } from "../config/passport.js";
 
 const userRouter = Router();
 
-userRouter.get("/signup", (req, res, next) => {
-  res.send("signupform");
-});
-
 userRouter.post("/signup", addUser);
-
-userRouter.get("/login", showLoginForm);
 
 userRouter.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
