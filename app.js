@@ -7,13 +7,22 @@ import cors from "cors"
 
 const app = express();
 
-app.use(cors())         
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}))         
 app.use(express.json());
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", (req, res) => res.json("{ 'greeting': 'Hello World'}"))
+app.get("/", (req, res) => {
+  if(req.user) {
+    res.json({ 'greeting': `Hello ${req.user.name}`})
+  } else {
+    res.json({ 'greeting': 'Hello World'})
+  }
+})
 
 app.use("/users", userRouter);
 
