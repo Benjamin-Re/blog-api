@@ -25,7 +25,7 @@ userRouter.get("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     } else {
-      res.redirect("/");
+      res.status(200).json({ 'success': 'true'});
     }
   });
 });
