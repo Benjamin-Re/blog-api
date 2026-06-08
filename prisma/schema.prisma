@@ -24,3 +24,9 @@ model Session {
   data String
   expiresAt DateTime
 }
+
+model Message {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+}

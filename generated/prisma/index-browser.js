@@ -133,6 +133,12 @@ exports.Prisma.SessionScalarFieldEnum = {
   expiresAt: 'expiresAt'
 };
 
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -146,7 +152,8 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Session: 'Session'
+  Session: 'Session',
+  Message: 'Message'
 };
 
 /**
