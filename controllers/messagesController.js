@@ -5,4 +5,16 @@ async function getAllMessages(req, res, next) {
     res.json(messages)
 }
 
-export { getAllMessages }
+async function createMessage(req, res, next) {
+    const title = req.body.title
+    const content = req.body.content
+    await prisma.message.create({
+        data: {
+            title: title,
+            content: content
+        },
+    })
+    res.status(200).json({title, content})
+}
+
+export { getAllMessages, createMessage }
