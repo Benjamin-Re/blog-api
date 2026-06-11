@@ -38,7 +38,7 @@ function isAuth(req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.send("loginForm");
+    res.status(404).json({'status': 'Unauthorized'});
   }
 }
 
