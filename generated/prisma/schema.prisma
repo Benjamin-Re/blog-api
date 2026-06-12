@@ -25,8 +25,18 @@ model Session {
   expiresAt DateTime
 }
 
-model Message {
-  id      Int    @id @default(autoincrement())
-  title   String
-  content String
+model Post {
+  id        Int       @id @default(autoincrement())
+  title     String
+  content   String
+  timestamp DateTime  @default(now())
+  comments  Comment[]
+}
+
+model Comment {
+  id     Int    @id @default(autoincrement())
+  author String
+  body   String
+  post   Post?  @relation(fields: [postId], references: [id])
+  postId Int?
 }

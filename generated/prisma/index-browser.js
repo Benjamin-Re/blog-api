@@ -133,10 +133,18 @@ exports.Prisma.SessionScalarFieldEnum = {
   expiresAt: 'expiresAt'
 };
 
-exports.Prisma.MessageScalarFieldEnum = {
+exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  content: 'content'
+  content: 'content',
+  timestamp: 'timestamp'
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  author: 'author',
+  body: 'body',
+  postId: 'postId'
 };
 
 exports.Prisma.SortOrder = {
@@ -149,11 +157,17 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
-  Message: 'Message'
+  Post: 'Post',
+  Comment: 'Comment'
 };
 
 /**

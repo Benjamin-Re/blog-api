@@ -2,7 +2,7 @@ import express from "express";
 import session from "express-session";
 import { passport } from "./config/passport.js";
 import userRouter from "./routes/userRouter.js";
-import messagesRouter from './routes/messagesRouter.js'
+import postsRouter from './routes/postsRouter.js'
 import cors from "cors"
 
 
@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/users", userRouter);
-app.use("/messages", messagesRouter)
+app.use("/posts", postsRouter)
 
 const PORT = process.env.PORT || 3000;
 

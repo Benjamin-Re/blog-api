@@ -10,7 +10,7 @@ userRouter.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) return next(err);
     if (!user) {
-      console.log("Login failed:", info?.message);
+      console.log("Login failed:", info?.post);
       return res.redirect("/users/login");
     }
     req.logIn(user, (err) => {

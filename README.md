@@ -1,0 +1,4 @@
+- JWT for auth []
+- rename messages to posts [x]
+- CRUD for posts []
+- CRUD for comments []
