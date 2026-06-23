@@ -1,10 +1,7 @@
 import express from "express";
-import session from "express-session";
-import { passport } from "./config/passport.js";
 import userRouter from "./routes/userRouter.js";
 import postsRouter from './routes/postsRouter.js'
 import cors from "cors"
-
 
 const app = express();
 
@@ -13,9 +10,6 @@ app.use(cors({
   credentials: true
 }))         
 app.use(express.json());
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.get("/", (req, res) => {
   if(req.user) {

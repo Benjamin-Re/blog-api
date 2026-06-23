@@ -1,20 +1,16 @@
 import passport from "passport";
-import passportLocal from "passport-local";
-import bcrypt from "bcryptjs";
+import passportJwt from "passport-jwt"
 import prisma from "../lib/prisma.js";
 
-const { Strategy: LocalStrategy } = passportLocal;
+const { Strategy: JwtStrategy, ExtractJwt } = passportJwt
 
 passport.use(
-  new LocalStrategy(
-    { usernameField: "name" },
-    async (username, password, done) => {
+  new JwtStrategy(
+    { jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), secretOrKey: process.env.JWT_SECRET },
+    async (payload, done) => {
       try {
-        const user = await prisma.user.findFirst({ where: { name: username } });
+        const user = await prisma.user.findFirst({ where: { id: payload.sub } });
         if (!user) return done(null, false, { post: "Incorrect username" });
-
-        const match = await bcrypt.compare(password, user.password);
-        if (!match) return done(null, false, { post: "Incorrect password" });
         return done(null, user);
       } catch (err) {
         return done(err);
@@ -23,23 +19,6 @@ passport.use(
   ),
 );
 
-passport.serializeUser((user, done) => done(null, user.id));
 
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await prisma.user.findUnique({ where: { id } });
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
-});
 
-function isAuth(req, res, next) {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.status(404).json({'status': 'Unauthorized'});
-  }
-}
-
-export { passport, isAuth };
+export { passport };
