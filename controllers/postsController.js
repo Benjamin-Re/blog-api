@@ -1,11 +1,11 @@
 import prisma from "../lib/prisma.js";
 
-async function getAllPosts(req, res, next) {
+async function getAllPosts(req, res) {
     const posts = await prisma.post.findMany()
     res.json(posts)
 }
 
-async function createPost(req, res, next) {
+async function createPost(req, res) {
     const title = req.body.title
     const content = req.body.content
     await prisma.post.create({
@@ -17,7 +17,7 @@ async function createPost(req, res, next) {
     res.status(200).json({title, content})
 }
 
-async function editPost(req, res, next) {
+async function editPost(req, res) {
     const title = req.body.title
     const content = req.body.content
     const postId = req.body.id
@@ -28,11 +28,18 @@ async function editPost(req, res, next) {
     res.status(200).json({"update": "success"})
 }
 
-async function getOnePost(req, res, next) {
+async function getOnePost(req, res) {
     const post = await prisma.post.findUnique({
         where: { id: Number(req.params.id) }
     })
     res.status(200).json({ "post": post})
 }
 
-export { getAllPosts, createPost, editPost, getOnePost }
+async function deletePost(req, res) {
+    await prisma.post.delete({
+        where: { id: Number(req.body.id) }
+    })
+    res.status(200).json({ "deleted": "success"})
+}
+
+export { getAllPosts, createPost, editPost, getOnePost, deletePost }
