@@ -1,6 +1,7 @@
 import express from "express";
 import userRouter from "./routes/userRouter.js";
 import postsRouter from './routes/postsRouter.js'
+import commentsRouter from './routes/commentsRouter.js'
 import cors from "cors"
 
 const app = express();
@@ -20,7 +21,8 @@ app.get("/", (req, res) => {
 })
 
 app.use("/users", userRouter);
-app.use("/posts", postsRouter)
+app.use("/posts", postsRouter);
+app.use("/comments", commentsRouter)
 
 const PORT = process.env.PORT || 3000;
 
