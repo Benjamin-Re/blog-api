@@ -8,6 +8,6 @@ postsRouter.get("/", getAllPosts)
 postsRouter.post("/create", passport.authenticate("jwt", { session: false }), createPost)
 postsRouter.post("/edit", passport.authenticate("jwt", { session: false }), editPost)
 postsRouter.post("/delete", passport.authenticate("jwt", { session: false }), deletePost)
-postsRouter.get("/edit/:id", getOnePost)
+postsRouter.get("/:id", getOnePost)
 
 export default postsRouter
