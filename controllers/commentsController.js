@@ -5,6 +5,15 @@ async function getAllComments(req, res) {
     res.json(comments)
 }
 
+async function getAllCommentsPerPost(req, res) {
+    const postId = req.params.postId
+    console.log(postId)
+    const comments = await prisma.comment.findMany({
+        where: { postId: Number(postId) }
+    })
+    res.json(comments)
+}
+
 async function createComment(req, res) {
     const author = req.body.author
     const body = req.body.body
@@ -45,4 +54,4 @@ async function deleteComment(req, res) {
     res.status(200).json({ "deleted": "success"})
 }
 
-export { getAllComments, createComment, editComment, getOneComment, deleteComment }
+export { getAllComments, createComment, editComment, getOneComment, deleteComment, getAllCommentsPerPost }
