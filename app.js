@@ -7,7 +7,7 @@ import cors from "cors"
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:4001'],
+  origin: ['http://localhost:5173', 'http://localhost:4001', 'http://localhost:4000'],
   credentials: true
 }))         
 app.use(express.json());
