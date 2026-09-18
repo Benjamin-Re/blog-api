@@ -7,7 +7,7 @@ import cors from "cors"
 const app = express();
 
 app.use(cors({
-  origin: ['https://blog-fe-reader.vercel.app', 'https://blog-fe-eight-tau.vercel.app', 'http://localhost:5173/'],
+  origin: ['https://blog-fe-reader.vercel.app', 'https://blog-fe-eight-tau.vercel.app', 'http://localhost:5173'],
   credentials: true
 }))         
 app.use(express.json());
